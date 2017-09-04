@@ -22,6 +22,7 @@ function [ output ] = BisectionMethod( equation, intervalStart, intervalEnd, max
         bOutput = equation(b);
         
         % Print out iteration info
+        %fprintf('Iteration #%d: BisectionMethod(f, %f, %f), p=%f, f(a)=%f, f(b)=%f, f(p)=%f\n', iteration, a, b, p, aOutput, bOutput, pOutput);
         fprintf('Iteration #%d: BisectionMethod(f, %f, %f), p=%f\n', iteration, a, b, p);
         
         % Check stopping criteria conditions
@@ -45,11 +46,12 @@ function [ output ] = BisectionMethod( equation, intervalStart, intervalEnd, max
         end
         
         % Otherwise determine what the next iteration will be
-        if (aOutput > 0 && bOutput < 0) || (aOutput < 0 && bOutput > 0)
-            b = p;
-        else 
+        if bOutput * pOutput < 0
             a = p;
-        end              
+        end
+        if bOutput * pOutput > 0
+            b = p;
+        end             
         
         % Finish preparing for the next iteration
         previousP = p;
