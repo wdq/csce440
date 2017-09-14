@@ -21,3 +21,10 @@ station1Lagrange = LagrangeInterpolation(station1x, station1y, pointToSolve)
 station2Lagrange = LagrangeInterpolation(station2x, station2y, pointToSolve)
 station3Lagrange = LagrangeInterpolation(station3x, station3y, pointToSolve)
 station4Lagrange = LagrangeInterpolation(station4x, station4y, pointToSolve)
+
+% Neville Polynomial Interpolation
+
+station1Neville = NevilleInterpolation(station1x, station1y, pointToSolve)
+station2Neville = NevilleInterpolation(station2x, station2y, pointToSolve)
+station3Neville = NevilleInterpolation(station3x, station3y, pointToSolve)
+station4Neville = NevilleInterpolation(station4x, station4y, pointToSolve)
