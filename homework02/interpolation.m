@@ -36,15 +36,5 @@ pointToSolve = 10;
 %station3Newton = NewtonInterpolation(station3x, station3y, pointToSolve)
 %station4Newton = NewtonInterpolation(station4x, station4y, pointToSolve)
 
-% Lab
-labX = [6, 13, 20, 27];
-labY = [75, 78, 72, 68];
-labPoint = 9;
-labLagrange = LagrangeLab(labX, labY, labPoint)
-%74.7388?
-
-% Find L30, L31, L32, L33
-% Find Interpolating polynomial
-
 
 
