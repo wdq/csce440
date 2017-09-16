@@ -17,14 +17,34 @@ pointToSolve = 10;
 
 % Lagrange Polynomial Interpolation
 
-station1Lagrange = LagrangeInterpolation(station1x, station1y, pointToSolve)
-station2Lagrange = LagrangeInterpolation(station2x, station2y, pointToSolve)
-station3Lagrange = LagrangeInterpolation(station3x, station3y, pointToSolve)
-station4Lagrange = LagrangeInterpolation(station4x, station4y, pointToSolve)
+%station1Lagrange = LagrangeInterpolation(station1x, station1y, pointToSolve)
+%station2Lagrange = LagrangeInterpolation(station2x, station2y, pointToSolve)
+%station3Lagrange = LagrangeInterpolation(station3x, station3y, pointToSolve)
+%station4Lagrange = LagrangeInterpolation(station4x, station4y, pointToSolve)
 
 % Neville Polynomial Interpolation
 
-station1Neville = NevilleInterpolation(station1x, station1y, pointToSolve)
-station2Neville = NevilleInterpolation(station2x, station2y, pointToSolve)
-station3Neville = NevilleInterpolation(station3x, station3y, pointToSolve)
-station4Neville = NevilleInterpolation(station4x, station4y, pointToSolve)
+%station1Neville = NevilleInterpolation(station1x, station1y, pointToSolve)
+%station2Neville = NevilleInterpolation(station2x, station2y, pointToSolve)
+%station3Neville = NevilleInterpolation(station3x, station3y, pointToSolve)
+%station4Neville = NevilleInterpolation(station4x, station4y, pointToSolve)
+
+% Newton Polynoial Interpolation
+
+%station1Newton = NewtonInterpolation(station1x, station1y, pointToSolve)
+%station2Newton = NewtonInterpolation(station2x, station2y, pointToSolve)
+%station3Newton = NewtonInterpolation(station3x, station3y, pointToSolve)
+%station4Newton = NewtonInterpolation(station4x, station4y, pointToSolve)
+
+% Lab
+labX = [6, 13, 20, 27];
+labY = [75, 78, 72, 68];
+labPoint = 9;
+labLagrange = LagrangeLab(labX, labY, labPoint)
+%74.7388?
+
+% Find L30, L31, L32, L33
+% Find Interpolating polynomial
+
+
+
