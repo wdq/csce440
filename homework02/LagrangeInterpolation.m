@@ -10,15 +10,18 @@ function [ output ] = LagrangeInterpolation( xValues, yValues, point )
 
     % Create the output variable for leter, and get number of data points.
     output = 0;
+    outputFunction = 0;
     dataPointCount = length(xValues);
     
     % Keep track of iteration number, and the iteration limit.
     iteration = 0;
     maxIteration = dataPointCount - 1;
+    syms x
     
     % While there are iterations left continue working on the solution.
     while iteration <= maxIteration        
         iterationResult = 1;
+        iterationResultFunction = 1;
         
         % Find the Li product term by looping through needed values.
         % Li is product from 0 to maxIterations, but not the current
@@ -26,14 +29,19 @@ function [ output ] = LagrangeInterpolation( xValues, yValues, point )
         for productCount = 0:(dataPointCount - 1)
             if productCount ~= iteration
                 iterationResult = iterationResult * ((point - xValues(productCount+1)) / (xValues(iteration+1) - xValues(productCount+1)));
+                iterationResultFunction = iterationResultFunction * ((x - xValues(productCount+1)) / (xValues(iteration+1) - xValues(productCount+1)));
             end
         end
         
         % Incorporate the y value, and add the iteration results to output.
         output = output + (yValues(iteration+1) * iterationResult);
+        outputFunction = outputFunction + (yValues(iteration+1) * iterationResultFunction);
         
         iteration = iteration + 1; 
     end   
+    
+    % Print out the function
+    outputFunction
     
     return
 
