@@ -1,0 +1,31 @@
+function [ output ] = LinearSpatialInterpolation( points, triangles )
+    output = 0;
+    trianglesCount = length(triangles);
+    
+    for trianglesCounter = 1:trianglesCount
+        % Get the data point coordinates from the input
+        % Point 1
+        point1X = points(2, triangles(2, trianglesCounter));
+        point1Y = points(3, triangles(2, trianglesCounter));
+        point1Z = points(4, triangles(2, trianglesCounter));
+        % Point 2
+        point2X = points(2, triangles(3, trianglesCounter));
+        point2Y = points(3, triangles(3, trianglesCounter));
+        point2Z = points(4, triangles(3, trianglesCounter));
+        % Point 3
+        point3X = points(2, triangles(4, trianglesCounter));
+        point3Y = points(3, triangles(4, trianglesCounter));
+        point3Z = points(4, triangles(4, trianglesCounter));
+        
+        % Find the value of A
+        AMatrix = [1 point1X point1Y; 1 point2X point2Y; 1 point3X point3Y];
+        A = (1/2) * det(AMatrix);
+        
+        n1 = ((x * (point2Y - point3Y)) - (y * (point2X - point3X)) + ((point2X * point3Y) - (point3X * point2Y))) / (2 * A);
+        n2 = ((x * (point3Y - point1Y)) - (y * (point2X - point3X)) + ((point2X * point3Y) - (point3X * point2Y))) / (2 * A);
+        n3 = ((x * (point2Y - point3Y)) - (y * (point2X - point3X)) + ((point2X * point3Y) - (point3X * point2Y))) / (2 * A);
+        
+    end
+
+end
+
