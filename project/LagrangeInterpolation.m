@@ -1,0 +1,46 @@
+% Find result of the Lagrange interpolating polynomial at a point.
+
+% Example usage:
+% station4x = [7, 14, 21, 28];
+% station4y = [32, 34, 36, 35];
+% pointToSolve = 10;
+% station4Lagrange = LagrangeInterpolation(station4x, station4y, pointToSolve)
+
+function [ outputFunction ] = LagrangeInterpolation( xValues, yValues )
+
+    % Create the output variable for leter, and get number of data points.
+    outputFunction = 0;
+    dataPointCount = length(xValues);
+    
+    % Keep track of iteration number, and the iteration limit.
+    iteration = 0;
+    maxIteration = dataPointCount - 1;
+    syms x
+    
+    % While there are iterations left continue working on the solution.
+    while iteration <= maxIteration        
+        iterationResult = 1;
+        iterationResultFunction = 1;
+        
+        % Find the Li product term by looping through needed values.
+        % Li is product from 0 to maxIterations, but not the current
+        % iteration: (x-xj)/(xi-xj)
+        for productCount = 0:(dataPointCount - 1)
+            if productCount ~= iteration
+                iterationResultFunction = iterationResultFunction * ((x - xValues(productCount+1)) / (xValues(iteration+1) - xValues(productCount+1)));
+            end
+        end
+        
+        % Incorporate the y value, and add the iteration results to output.
+        outputFunction = outputFunction + (yValues(iteration+1) * iterationResultFunction);
+        
+        iteration = iteration + 1; 
+    end   
+    
+    % Print out the function
+    %outputFunction
+    
+    return
+
+end
+

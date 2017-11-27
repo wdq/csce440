@@ -12,15 +12,37 @@ day_data = csvread('csce440-2017-11-24.csv');
 % Data from a week: 2017-11-18 through 2017-11-24
 week_data = csvread('csce440-2017-11-24-week.csv');
 
-    
-day_data_index = zeros(size(day_data, 1));
-day_data_sht31 = zeros(size(day_data, 1));
+% Create vectors of the actual data (index counter, and sht31 temp)    
+day_data_index = zeros(size(day_data, 1), 1);
+day_data_sht31 = zeros(size(day_data, 1), 1);
 
+% Copy the values from the array to the vectors
 for arrayRowCount = 1:size(day_data, 1)
-    day_data_index(arrayRowCount) = day_data(arrayRowCount][0];
-    day_data_sht31(arrayRowCount) = day_data(arrayRowCount, 1];
+    day_data_index(arrayRowCount) = day_data(arrayRowCount, 1);
+    day_data_sht31(arrayRowCount) = day_data(arrayRowCount, 2);
 end
 
+% Remove every other data point from the vectors
+% Used to compare the interpolation with the actual
+% known values that were removed.
+day_data_index_filtered = day_data_index;
+day_data_sht31_filtered = day_data_sht31;
+day_data_index_filtered(2:2:end,:) = [];
+day_data_sht31_filtered(2:2:end,:) = [];
+
+% Using Lagrange Polynomial Interpolation
+% Doesn't work well at all. 
+% It takes several minutes to process, and the results are mostly
+
+%day_lagrange = LagrangeInterpolation(day_data_index_filtered, day_data_sht31_filtered)
+%day_data_sht31_lagrange = zeros(size(day_data, 1), 1);
+
+%for arrayRowCount = 1:size(day_data, 1)
+%    day_data_sht31_lagrange(arrayRowCount) = subs(day_lagrange, day_data_index(arrayRowCount));
+%end
+
+%scatter(day_data_index, day_data_sht31);
+%hold on;
+%scatter(day_data_index, day_data_sht31_lagrange);
 
 
-plot(day_data(1:3)')

@@ -30,5 +30,44 @@ day_data_sht31_filtered = day_data_sht31;
 day_data_index_filtered(2:2:end,:) = [];
 day_data_sht31_filtered(2:2:end,:) = [];
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-plot(day_data_index, day_data_sht31)
+% Using Lagrange Polynomial Interpolation
+% Doesn't work well at all. 
+% It takes several minutes to process.
+% The numbers used for the calculation match, but the other numbers don't.
+% Because there are so many data points a really high degree polynomial is
+% generated with lots of extreme features that don't match the actual data.
+% I'll probably use this as an example of a method that doesn't work very
+% well for my data.
+
+%day_lagrange = LagrangeInterpolation(day_data_index_filtered, day_data_sht31_filtered)
+%day_data_sht31_lagrange = zeros(size(day_data, 1), 1);
+
+%for arrayRowCount = 1:size(day_data, 1)
+%    day_data_sht31_lagrange(arrayRowCount) = subs(day_lagrange, day_data_index(arrayRowCount));
+%end
+
+%scatter(day_data_index, day_data_sht31);
+%hold on;
+%scatter(day_data_index, day_data_sht31_lagrange);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Using Piecewise Linear Interpolation
+% Works really well.
+% It's pretty quick to process, and the difference in real vs. actual
+% values is usually under a quarter of a degree, which is less than the
+% precision of most temperature sensors. 
+% Quick oscillations in temperature seem to cause the accuracy to decrease
+% the most.
+
+piecewise_linear = PiecewiseLinearInterpolation(day_data_index_filtered, day_data_sht31_filtered, day_data_index);
+
+difference = abs(day_data_sht31 - piecewise_linear);
+
+scatter(day_data_index, day_data_sht31);
+hold on;
+scatter(day_data_index, piecewise_linear);
+hold on;
+scatter(day_data_index, difference);
